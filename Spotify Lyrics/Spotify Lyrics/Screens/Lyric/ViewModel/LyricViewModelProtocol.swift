@@ -21,8 +21,7 @@ protocol LyricViewModelProtocol {
     var trackArtistName: String? { get }
     var trackAlbumPictureURL: URL? { get }
     
-    var hasLyric: Bool { get }
-    var lyric: String? { get }
+    var lyric: String { get }
     
     func prepareContent()
     func logout()

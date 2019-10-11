@@ -10,22 +10,15 @@ import UIKit
 
 extension CAGradientLayer {
     
-    @discardableResult
-    func animate(toColors colors: [CGColor],
-                 withDuration duration: TimeInterval,
-                 withDelegate delegate: CAAnimationDelegate? = nil) -> (CABasicAnimation, String)  {
-        
+    func animate(to colors: [CGColor], with duration: TimeInterval) {
         let gradientChangeColor = CABasicAnimation(keyPath: "colors")
         gradientChangeColor.duration = duration
         gradientChangeColor.fromValue = self.colors
         gradientChangeColor.toValue = colors
         gradientChangeColor.fillMode = CAMediaTimingFillMode.forwards
-        gradientChangeColor.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut)
+        gradientChangeColor.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.linear)
         gradientChangeColor.isRemovedOnCompletion = false
-        gradientChangeColor.delegate = delegate
-        
-        self.add(gradientChangeColor, forKey: "colorChange")
-        
-        return (gradientChangeColor, "colorChange")
+        add(gradientChangeColor, forKey: "colorChange")
+        self.colors = colors
     }
 }

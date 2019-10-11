@@ -29,7 +29,8 @@ final class LyricView: UIViewController {
     static func present(in view: UIViewController) {
         let lyricView = LyricView()
         lyricView.modalPresentationStyle = .fullScreen
-        view.present(lyricView, animated: false)
+        lyricView.modalTransitionStyle = .crossDissolve
+        view.present(lyricView, animated: true)
     }
     
     override func viewDidLoad() {
@@ -45,23 +46,28 @@ final class LyricView: UIViewController {
     }
     
     private func setupView() {
+        constraintUserProfileViewBottom.constant = -200.0
         viewUserInformations.clipsToBounds = true
         viewUserInformations.layer.cornerRadius = 15.0
         viewUserInformations.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
         
-        constraintUserProfileViewBottom.constant = -200.0
-        
         imgUserProfilePicture.layer.cornerRadius = 30.0
+        stackTrackInformations.alpha = 0.0
+        lblLyric.alpha = 0.0
         
-        stackTrackInformations.isHidden = true
-        lblLyric.isHidden = true
-        
-        backgroundLayer.colors = [UIColor.black.cgColor, UIColor.black.cgColor]
+        let defaultColor = UIColor(white: 0.70, alpha: 1.0)
+        backgroundLayer.colors = [defaultColor.cgColor, defaultColor.cgColor]
         view.layer.insertSublayer(backgroundLayer, at: 0)
     }
     
     @IBAction private func logout(_ sender: UIButton) {
         viewModel.logout()
+    }
+    
+    private func updateBackground() {
+        guard let image = imgTrackAlbumPicture.image else { return }
+        let albumGradientScale = image.averageColor().gradientScale().map { $0.cgColor }
+        backgroundLayer.animate(to: albumGradientScale, with: 0.25)
     }
 }
 
@@ -81,37 +87,31 @@ extension LyricView: LyricViewModelDelegate {
     }
     
     func didUpdateTrackInformations(changedAlbum: Bool) {
-        lblLyric.isHidden = true
+        lblLyric.animate(to: 0.0, with: 0.15)
         guard viewModel.isPlaying else {
-            stackTrackInformations.isHidden = true
+            stackTrackInformations.animate(to: 0.0, with: 0.25)
             return
         }
         
-        stackTrackInformations.isHidden = false
-        lblTrackName.text = viewModel.trackName
-        lblTrackArtistName.text = viewModel.trackArtistName
-        lblTrackAlbumName.text = viewModel.trackAlbumName
+        stackTrackInformations.animate(to: 1.0, with: 0.25)
+        
+        UILabel.animate(with: 0.25, viewsTexts: (lblTrackName, viewModel.trackName),
+                                                (lblTrackArtistName, viewModel.trackArtistName),
+                                                (lblTrackAlbumName, viewModel.trackAlbumName))
         
         imgTrackAlbumPicture.load(from: viewModel.trackAlbumPictureURL,
                                   placeholder: UIImage(named: "icon_album")) { [weak self] in
-            guard let self = self, changedAlbum, let image = self.imgTrackAlbumPicture.image else { return }
-            
-            let albumGradientScale = image.averageColor().gradientScale().map { $0.cgColor }
-            self.backgroundLayer.animate(toColors: albumGradientScale, withDuration: 0.25)
+            guard changedAlbum else { return }
+            self?.updateBackground()
         }
     }
     
     func didUpdateLyricInformations() {
-        lblLyric.isHidden = false
-        guard viewModel.hasLyric else {
-            lblLyric.text = "Sorry, we couldn’t find any lyrics for this song."
-            return
-        }
-        
-        lblLyric.text = viewModel.lyric
+        lblLyric.animate(to: 1.0, with: 0.15)
+        lblLyric.animate(to: viewModel.lyric, with: 0.25)
     }
     
     func presentApp() {
-        AppView.present(in: self)
+        LoginView.present(in: self)
     }
 }

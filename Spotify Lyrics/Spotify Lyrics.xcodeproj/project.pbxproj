@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		8D61CAD7F44F1E0FC0CE47B7 /* Pods_Spotify_Lyrics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2424F61E22AA0FA1C4AA0D2B /* Pods_Spotify_Lyrics.framework */; };
+		DCACE7472350BF54002BF227 /* UIView+Animation.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCACE7462350BF54002BF227 /* UIView+Animation.swift */; };
+		DCACE7492350C02B002BF227 /* UILabel+Animation.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCACE7482350C02B002BF227 /* UILabel+Animation.swift */; };
+		DCACE74D2350C598002BF227 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCACE74C2350C598002BF227 /* LoginView.swift */; };
+		DCACE74F2350C5A0002BF227 /* LoginView.xib in Resources */ = {isa = PBXBuildFile; fileRef = DCACE74E2350C5A0002BF227 /* LoginView.xib */; };
 		DCD3B288234FDACB0023D564 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCD3B287234FDACB0023D564 /* AppDelegate.swift */; };
 		DCD3B28A234FDACB0023D564 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCD3B289234FDACB0023D564 /* SceneDelegate.swift */; };
 		DCD3B291234FDACC0023D564 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DCD3B290234FDACC0023D564 /* Assets.xcassets */; };
@@ -73,6 +77,10 @@
 		1CE127D9D339595E3C639BFA /* Pods-Spotify Lyrics.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Spotify Lyrics.release.xcconfig"; path = "Target Support Files/Pods-Spotify Lyrics/Pods-Spotify Lyrics.release.xcconfig"; sourceTree = "<group>"; };
 		2424F61E22AA0FA1C4AA0D2B /* Pods_Spotify_Lyrics.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Spotify_Lyrics.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		65EA79FADCC0753D6BDF131D /* Pods-Spotify Lyrics.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Spotify Lyrics.debug.xcconfig"; path = "Target Support Files/Pods-Spotify Lyrics/Pods-Spotify Lyrics.debug.xcconfig"; sourceTree = "<group>"; };
+		DCACE7462350BF54002BF227 /* UIView+Animation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Animation.swift"; sourceTree = "<group>"; };
+		DCACE7482350C02B002BF227 /* UILabel+Animation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+Animation.swift"; sourceTree = "<group>"; };
+		DCACE74C2350C598002BF227 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		DCACE74E2350C5A0002BF227 /* LoginView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LoginView.xib; sourceTree = "<group>"; };
 		DCD3B284234FDACB0023D564 /* Spotify Lyrics.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Spotify Lyrics.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DCD3B287234FDACB0023D564 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DCD3B289234FDACB0023D564 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -166,6 +174,23 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		DCACE74A2350C58B002BF227 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				DCACE74B2350C58F002BF227 /* View */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
+		DCACE74B2350C58F002BF227 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				DCACE74C2350C598002BF227 /* LoginView.swift */,
+				DCACE74E2350C5A0002BF227 /* LoginView.xib */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		DCD3B27B234FDACB0023D564 = {
 			isa = PBXGroup;
 			children = (
@@ -243,6 +268,7 @@
 			children = (
 				DCD3B292234FDACC0023D564 /* LaunchScreen.storyboard */,
 				DCD3B2BA234FDB370023D564 /* App */,
+				DCACE74A2350C58B002BF227 /* Login */,
 				DCD3B2D2234FEDD00023D564 /* Lyric */,
 			);
 			path = Screens;
@@ -420,6 +446,8 @@
 				DCD3B309235015DA0023D564 /* UIImage+AverageColor.swift */,
 				DCD3B30B235016230023D564 /* UIColor+GradientScale.swift */,
 				DCD3B30D2350164D0023D564 /* CAGradientLayer+Animation.swift */,
+				DCACE7462350BF54002BF227 /* UIView+Animation.swift */,
+				DCACE7482350C02B002BF227 /* UILabel+Animation.swift */,
 			);
 			path = UIKit;
 			sourceTree = "<group>";
@@ -563,6 +591,7 @@
 				DCD3B310235021170023D564 /* AppView.xib in Resources */,
 				DCD3B2D8234FEE130023D564 /* LyricView.xib in Resources */,
 				DCD3B294234FDACC0023D564 /* LaunchScreen.storyboard in Resources */,
+				DCACE74F2350C5A0002BF227 /* LoginView.xib in Resources */,
 				DCD3B291234FDACC0023D564 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -659,11 +688,14 @@
 				DCD3B2DE234FEE2D0023D564 /* LyricViewModelDelegate.swift in Sources */,
 				DCD3B317235029610023D564 /* LyricSearch.swift in Sources */,
 				DCD3B3132350286F0023D564 /* URL+Query.swift in Sources */,
+				DCACE7472350BF54002BF227 /* UIView+Animation.swift in Sources */,
 				DCD3B3042350043F0023D564 /* Syncer.swift in Sources */,
 				DCD3B2E5234FF13F0023D564 /* Request+User.swift in Sources */,
 				DCD3B2BE234FDBE60023D564 /* AppView.swift in Sources */,
 				DCD3B2D1234FE5A30023D564 /* Spotify.swift in Sources */,
 				DCD3B2DC234FEE230023D564 /* LyricViewModelProtocol.swift in Sources */,
+				DCACE7492350C02B002BF227 /* UILabel+Animation.swift in Sources */,
+				DCACE74D2350C598002BF227 /* LoginView.swift in Sources */,
 				DCD3B2C4234FDBFE0023D564 /* AppViewModelDelegate.swift in Sources */,
 				DCD3B2E8234FF3A30023D564 /* User.swift in Sources */,
 			);

@@ -9,7 +9,7 @@
 import UIKit
 
 final class AppView: UIViewController {
- 
+    
     private var viewModel: AppViewModelProtocol = AppViewModel()
     
     static func present(in view: UIViewController) {
@@ -23,19 +23,11 @@ final class AppView: UIViewController {
         viewModel.delegate = self
         viewModel.prepareApplication()
     }
-    
-    @objc private func didLoginWithSuccess() {
-        viewModel.prepareApplication()
-    }
 }
 
 extension AppView: AppViewModelDelegate {
     func presentLogin() {
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(didLoginWithSuccess),
-                                               name: Spotify.loginNotification,
-                                               object: nil)
-        Spotify.login(from: self)
+        LoginView.present(in: self)
     }
     
     func presentLyric() {

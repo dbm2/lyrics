@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14868" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14824"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="LoginView" customModule="Spotify_Lyrics" customModuleProvider="target">
+            <connections>
+                <outlet property="btnLogin" destination="QaJ-SR-pSr" id="Whb-dg-4ZW"/>
+                <outlet property="view" destination="4nw-xj-P7v" id="QZM-vx-MBz"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="4nw-xj-P7v">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="9vV-rH-U2y">
+                    <rect key="frame" x="20" y="84" width="374" height="103"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Lyrics" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MGt-AA-5Jy">
+                            <rect key="frame" x="0.0" y="0.0" width="136" height="57.5"/>
+                            <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="48"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sing with your favorites artists and bands. See the lyrics for what you are currently listening." lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vln-Ii-Ads">
+                            <rect key="frame" x="0.0" y="65.5" width="364" height="37.5"/>
+                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
+                            <color key="textColor" red="0.2901960784" green="0.2901960784" blue="0.2901960784" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                </stackView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="We don’t collect or share any private data from your account." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DRy-db-Dhr">
+                    <rect key="frame" x="64.5" y="798.5" width="285.5" height="33.5"/>
+                    <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="14"/>
+                    <color key="textColor" red="0.79215686269999996" green="0.79215686269999996" blue="0.79215686269999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QaJ-SR-pSr">
+                    <rect key="frame" x="90" y="427" width="234" height="42"/>
+                    <color key="backgroundColor" red="0.16078431372549018" green="0.70588235294117641" blue="0.3411764705882353" alpha="1" colorSpace="calibratedRGB"/>
+                    <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="18"/>
+                    <inset key="contentEdgeInsets" minX="30" minY="10" maxX="30" maxY="10"/>
+                    <state key="normal" title="Connect with Spotify">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </state>
+                    <connections>
+                        <action selector="login:" destination="-1" eventType="touchUpInside" id="Nwo-v1-jop"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" white="0.92000000000000004" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="QaJ-SR-pSr" firstAttribute="centerX" secondItem="4nw-xj-P7v" secondAttribute="centerX" id="Lx5-HU-ptC"/>
+                <constraint firstItem="DRy-db-Dhr" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="YOt-CK-eMq" secondAttribute="leading" constant="30" id="RUd-Jq-4RC"/>
+                <constraint firstItem="YOt-CK-eMq" firstAttribute="bottom" secondItem="DRy-db-Dhr" secondAttribute="bottom" constant="30" id="bGp-ga-yhA"/>
+                <constraint firstItem="YOt-CK-eMq" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="DRy-db-Dhr" secondAttribute="trailing" constant="30" id="cap-it-TTn"/>
+                <constraint firstItem="9vV-rH-U2y" firstAttribute="top" secondItem="YOt-CK-eMq" secondAttribute="top" constant="40" id="m3j-td-bwA"/>
+                <constraint firstItem="9vV-rH-U2y" firstAttribute="leading" secondItem="YOt-CK-eMq" secondAttribute="leading" constant="20" id="n55-Hc-EGV"/>
+                <constraint firstItem="DRy-db-Dhr" firstAttribute="centerX" secondItem="4nw-xj-P7v" secondAttribute="centerX" id="rHw-Ol-rpY"/>
+                <constraint firstItem="QaJ-SR-pSr" firstAttribute="centerY" secondItem="4nw-xj-P7v" secondAttribute="centerY" id="w6a-tk-JYe"/>
+                <constraint firstAttribute="trailing" secondItem="9vV-rH-U2y" secondAttribute="trailing" constant="20" id="z6b-Mz-pfp"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="YOt-CK-eMq"/>
+            <point key="canvasLocation" x="137.68115942028987" y="85.714285714285708"/>
+        </view>
+    </objects>
+</document>

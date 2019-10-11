@@ -41,12 +41,11 @@ final class LyricViewModel: LyricViewModelProtocol {
         return URL(string: stringURL)
     }
     
-    var hasLyric: Bool {
-        return lyricMusic?.text != nil
-    }
-    
-    var lyric: String? {
-        return lyricMusic?.text
+    var lyric: String {
+        guard track != nil else {
+            return "Sorry, we couldn’t determine what song you're currently listening."
+        }
+        return lyricMusic?.text ?? "Sorry, we couldn’t find any lyrics for this song."
     }
     
     private var user: User?
