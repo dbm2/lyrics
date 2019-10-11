@@ -16,10 +16,14 @@ protocol LyricViewModelProtocol {
     var userProfilePictureURL: URL? { get }
     
     var isPlaying: Bool { get }
-    var trackName: String { get }
+    var trackName: String? { get }
     var trackAlbumName: String? { get }
     var trackArtistName: String? { get }
     var trackAlbumPictureURL: URL? { get }
     
+    var hasLyric: Bool { get }
+    var lyric: String? { get }
+    
     func prepareContent()
+    func logout()
 }

@@ -45,6 +45,11 @@
 		DCD3B30A235015DA0023D564 /* UIImage+AverageColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCD3B309235015DA0023D564 /* UIImage+AverageColor.swift */; };
 		DCD3B30C235016230023D564 /* UIColor+GradientScale.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCD3B30B235016230023D564 /* UIColor+GradientScale.swift */; };
 		DCD3B30E2350164D0023D564 /* CAGradientLayer+Animation.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCD3B30D2350164D0023D564 /* CAGradientLayer+Animation.swift */; };
+		DCD3B310235021170023D564 /* AppView.xib in Resources */ = {isa = PBXBuildFile; fileRef = DCD3B30F235021170023D564 /* AppView.xib */; };
+		DCD3B3132350286F0023D564 /* URL+Query.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCD3B3122350286F0023D564 /* URL+Query.swift */; };
+		DCD3B315235029020023D564 /* Request+Lyric.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCD3B314235029020023D564 /* Request+Lyric.swift */; };
+		DCD3B317235029610023D564 /* LyricSearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCD3B316235029610023D564 /* LyricSearch.swift */; };
+		DCD3B31B23502E410023D564 /* LyricMusic.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCD3B31A23502E410023D564 /* LyricMusic.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -111,6 +116,11 @@
 		DCD3B309235015DA0023D564 /* UIImage+AverageColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+AverageColor.swift"; sourceTree = "<group>"; };
 		DCD3B30B235016230023D564 /* UIColor+GradientScale.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+GradientScale.swift"; sourceTree = "<group>"; };
 		DCD3B30D2350164D0023D564 /* CAGradientLayer+Animation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CAGradientLayer+Animation.swift"; sourceTree = "<group>"; };
+		DCD3B30F235021170023D564 /* AppView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AppView.xib; sourceTree = "<group>"; };
+		DCD3B3122350286F0023D564 /* URL+Query.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL+Query.swift"; sourceTree = "<group>"; };
+		DCD3B314235029020023D564 /* Request+Lyric.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Request+Lyric.swift"; sourceTree = "<group>"; };
+		DCD3B316235029610023D564 /* LyricSearch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LyricSearch.swift; sourceTree = "<group>"; };
+		DCD3B31A23502E410023D564 /* LyricMusic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LyricMusic.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -251,6 +261,7 @@
 			isa = PBXGroup;
 			children = (
 				DCD3B2BD234FDBE60023D564 /* AppView.swift */,
+				DCD3B30F235021170023D564 /* AppView.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -330,6 +341,7 @@
 				DCD3B2E2234FF1320023D564 /* Request.swift */,
 				DCD3B2E4234FF13F0023D564 /* Request+User.swift */,
 				DCD3B2F8235001F60023D564 /* Request+Player.swift */,
+				DCD3B314235029020023D564 /* Request+Lyric.swift */,
 			);
 			path = Request;
 			sourceTree = "<group>";
@@ -337,12 +349,8 @@
 		DCD3B2E6234FF39B0023D564 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				DCD3B2E7234FF3A30023D564 /* User.swift */,
-				DCD3B2FA2350023E0023D564 /* Player.swift */,
-				DCD3B2E9234FF57F0023D564 /* Image.swift */,
-				DCD3B2FC2350025B0023D564 /* Track.swift */,
-				DCD3B2FE235002A00023D564 /* Artist.swift */,
-				DCD3B300235002A70023D564 /* Album.swift */,
+				DCD3B31823502E260023D564 /* Spotify */,
+				DCD3B31923502E2E0023D564 /* Vagalume */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -400,6 +408,7 @@
 		DCD3B307235015AA0023D564 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				DCD3B311235028610023D564 /* Foundation */,
 				DCD3B308235015B10023D564 /* UIKit */,
 			);
 			path = Extensions;
@@ -413,6 +422,36 @@
 				DCD3B30D2350164D0023D564 /* CAGradientLayer+Animation.swift */,
 			);
 			path = UIKit;
+			sourceTree = "<group>";
+		};
+		DCD3B311235028610023D564 /* Foundation */ = {
+			isa = PBXGroup;
+			children = (
+				DCD3B3122350286F0023D564 /* URL+Query.swift */,
+			);
+			path = Foundation;
+			sourceTree = "<group>";
+		};
+		DCD3B31823502E260023D564 /* Spotify */ = {
+			isa = PBXGroup;
+			children = (
+				DCD3B2E7234FF3A30023D564 /* User.swift */,
+				DCD3B2FA2350023E0023D564 /* Player.swift */,
+				DCD3B2E9234FF57F0023D564 /* Image.swift */,
+				DCD3B2FC2350025B0023D564 /* Track.swift */,
+				DCD3B2FE235002A00023D564 /* Artist.swift */,
+				DCD3B300235002A70023D564 /* Album.swift */,
+			);
+			path = Spotify;
+			sourceTree = "<group>";
+		};
+		DCD3B31923502E2E0023D564 /* Vagalume */ = {
+			isa = PBXGroup;
+			children = (
+				DCD3B316235029610023D564 /* LyricSearch.swift */,
+				DCD3B31A23502E410023D564 /* LyricMusic.swift */,
+			);
+			path = Vagalume;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -521,6 +560,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DCD3B310235021170023D564 /* AppView.xib in Resources */,
 				DCD3B2D8234FEE130023D564 /* LyricView.xib in Resources */,
 				DCD3B294234FDACC0023D564 /* LaunchScreen.storyboard in Resources */,
 				DCD3B291234FDACC0023D564 /* Assets.xcassets in Resources */,
@@ -605,9 +645,11 @@
 				DCD3B2F3234FF8B70023D564 /* UILoadableImageViewModel.swift in Sources */,
 				DCD3B2CE234FE4860023D564 /* Constants.swift in Sources */,
 				DCD3B2EA234FF57F0023D564 /* Image.swift in Sources */,
+				DCD3B315235029020023D564 /* Request+Lyric.swift in Sources */,
 				DCD3B2CA234FDE5C0023D564 /* HTTPMethod.swift in Sources */,
 				DCD3B2FD2350025B0023D564 /* Track.swift in Sources */,
 				DCD3B2FB2350023E0023D564 /* Player.swift in Sources */,
+				DCD3B31B23502E410023D564 /* LyricMusic.swift in Sources */,
 				DCD3B2DA234FEE1B0023D564 /* LyricViewModel.swift in Sources */,
 				DCD3B2F1234FF8AB0023D564 /* UILoadableImageView.swift in Sources */,
 				DCD3B30C235016230023D564 /* UIColor+GradientScale.swift in Sources */,
@@ -615,6 +657,8 @@
 				DCD3B2F9235001F60023D564 /* Request+Player.swift in Sources */,
 				DCD3B2C0234FDBEE0023D564 /* AppViewModel.swift in Sources */,
 				DCD3B2DE234FEE2D0023D564 /* LyricViewModelDelegate.swift in Sources */,
+				DCD3B317235029610023D564 /* LyricSearch.swift in Sources */,
+				DCD3B3132350286F0023D564 /* URL+Query.swift in Sources */,
 				DCD3B3042350043F0023D564 /* Syncer.swift in Sources */,
 				DCD3B2E5234FF13F0023D564 /* Request+User.swift in Sources */,
 				DCD3B2BE234FDBE60023D564 /* AppView.swift in Sources */,

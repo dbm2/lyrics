@@ -28,6 +28,21 @@ struct Constants {
         }
     }
     
+    struct Vagamule {
+        
+        struct Authorization {
+            static let ApiKey: String = "a2a8bc0497fc94c9201ff86c55259106"
+        }
+
+        struct Request {
+            static let hostname: URL = URL(string: "https://api.vagalume.com.br/")!
+            
+            struct Endpoint {
+                static let search: String = "search.php"
+            }
+        }
+    }
+    
     struct Syncer {
         static let updateTimeout: TimeInterval = 10.0
     }

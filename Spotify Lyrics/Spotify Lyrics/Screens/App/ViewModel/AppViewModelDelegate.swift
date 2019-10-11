@@ -11,5 +11,5 @@ import Foundation
 protocol AppViewModelDelegate: class {
     
     func presentLogin()
-    func presentLyric(with viewModel: LyricViewModelProtocol)
+    func presentLyric()
 }

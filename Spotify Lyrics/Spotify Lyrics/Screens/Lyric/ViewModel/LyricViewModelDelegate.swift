@@ -12,4 +12,7 @@ protocol LyricViewModelDelegate: class {
     
     func didUpdateUserInformations()
     func didUpdateTrackInformations(changedAlbum: Bool)
+    func didUpdateLyricInformations()
+    
+    func presentApp()
 }

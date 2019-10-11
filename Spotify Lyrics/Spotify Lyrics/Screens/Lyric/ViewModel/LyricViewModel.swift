@@ -24,8 +24,8 @@ final class LyricViewModel: LyricViewModelProtocol {
     var isPlaying: Bool {
         return track != nil
     }
-    var trackName: String {
-        return track?.name ?? "Currently playing"
+    var trackName: String? {
+        return track?.name
     }
     
     var trackAlbumName: String? {
@@ -41,8 +41,17 @@ final class LyricViewModel: LyricViewModelProtocol {
         return URL(string: stringURL)
     }
     
+    var hasLyric: Bool {
+        return lyricMusic?.text != nil
+    }
+    
+    var lyric: String? {
+        return lyricMusic?.text
+    }
+    
     private var user: User?
     private var track: Track?
+    private var lyricMusic: LyricMusic?
     
     private var syncer: Syncer<Player>?
     
@@ -56,6 +65,12 @@ final class LyricViewModel: LyricViewModelProtocol {
             })
     }
     
+    func logout() {
+        syncer?.stop()
+        Spotify.logout()
+        delegate?.presentApp()
+    }
+    
     private func syncPlayer() {
         guard let token = Spotify.currentToken else { return }
         syncer = Syncer<Player>(with: Constants.Syncer.updateTimeout,
@@ -64,10 +79,21 @@ final class LyricViewModel: LyricViewModelProtocol {
         syncer?.listen()
     }
     
+    private func fetchLyric() {
+        guard let track = track else { return }
+        _ = Request.searchLyric(forTrack: track.name, andArtist: track.artists.first?.name ?? "")
+            .replaceError(with: LyricSearch(mus: []))
+            .sink(receiveValue: { [weak self] (search) in
+                self?.lyricMusic = search.mus?.first
+                self?.delegate?.didUpdateLyricInformations()
+            })
+    }
+    
     private lazy var didReceivePlayer: (Player?) -> Void = { [weak self] player in
         guard self?.track?.id != player?.item?.id else { return }
         let changedAlbum = self?.track?.album.id != player?.item?.album.id
         self?.track = player?.item
         self?.delegate?.didUpdateTrackInformations(changedAlbum: changedAlbum)
+        self?.fetchLyric()
     }
 }

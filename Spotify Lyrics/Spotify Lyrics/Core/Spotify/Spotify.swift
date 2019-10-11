@@ -36,4 +36,8 @@ final class Spotify {
         SpotifyLoginPresenter.login(from: view, scopes: [.userReadPrivate,
                                                          .userReadCurrentlyPlaying])
     }
+    
+    static func logout() {
+        SpotifyLogin.shared.logout()
+    }
 }

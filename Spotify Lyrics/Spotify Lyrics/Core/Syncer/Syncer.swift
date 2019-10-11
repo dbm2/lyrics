@@ -36,7 +36,9 @@ class Syncer<T> where T: Decodable {
     
     func stop() {
         timer?.invalidate()
+        timer = nil
         subscriber?.cancel()
+        subscriber = nil
     }
     
     @objc private func fire() {

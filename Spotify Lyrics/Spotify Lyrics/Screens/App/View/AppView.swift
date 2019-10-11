@@ -10,16 +10,17 @@ import UIKit
 
 final class AppView: UIViewController {
  
-    private var viewModel: AppViewModelProtocol!
+    private var viewModel: AppViewModelProtocol = AppViewModel()
     
-    convenience init(with viewModel: AppViewModelProtocol) {
-        self.init()
-        self.viewModel = viewModel
-        self.viewModel.delegate = self
+    static func present(in view: UIViewController) {
+        let appView = AppView()
+        appView.modalPresentationStyle = .fullScreen
+        view.present(appView, animated: false)
     }
-
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        viewModel.delegate = self
         viewModel.prepareApplication()
     }
     
@@ -37,7 +38,7 @@ extension AppView: AppViewModelDelegate {
         Spotify.login(from: self)
     }
     
-    func presentLyric(with viewModel: LyricViewModelProtocol) {
-        LyricView.present(in: self, with: viewModel)
+    func presentLyric() {
+        LyricView.present(in: self)
     }
 }

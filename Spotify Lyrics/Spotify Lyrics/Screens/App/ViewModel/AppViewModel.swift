@@ -20,7 +20,7 @@ final class AppViewModel: AppViewModelProtocol {
             }
             
             Spotify.currentToken = token
-            self.delegate?.presentLyric(with: LyricViewModel())
+            self.delegate?.presentLyric()
         }
     }
 }
