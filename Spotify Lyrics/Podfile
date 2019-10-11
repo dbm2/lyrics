@@ -1,0 +1,4 @@
+target 'Spotify Lyrics' do
+  use_frameworks!
+  pod 'SpotifyLogin', '~> 0.1'
+end
