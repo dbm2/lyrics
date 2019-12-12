@@ -73,8 +73,8 @@ final class LyricViewModel: LyricViewModelProtocol {
     private func syncPlayer() {
         guard let token = Spotify.currentToken else { return }
         syncer = Syncer<Player>(with: Constants.Syncer.updateTimeout,
-                                and: Request.getCurrentlyPlaying(with: token))
-        syncer?.updateHandler = didReceivePlayer
+                                and: Request.getCurrentlyPlaying(with: token),
+                                handler: didReceivePlayerResult)
         syncer?.listen()
     }
     
@@ -88,11 +88,16 @@ final class LyricViewModel: LyricViewModelProtocol {
             })
     }
     
-    private lazy var didReceivePlayer: (Player?) -> Void = { [weak self] player in
-        guard self?.track?.id != player?.item?.id else { return }
-        let changedAlbum = self?.track?.album.id != player?.item?.album.id
-        self?.track = player?.item
-        self?.delegate?.didUpdateTrackInformations(changedAlbum: changedAlbum)
-        self?.fetchLyric()
+    private lazy var didReceivePlayerResult: (Result<Player, Error>) -> Void = { [weak self] result in
+        switch result {
+        case .failure:
+            break
+        case .success(let player):
+            guard self?.track?.id != player.item?.id else { return }
+            let changedAlbum = self?.track?.album.id != player.item?.album.id
+            self?.track = player.item
+            self?.delegate?.didUpdateTrackInformations(changedAlbum: changedAlbum)
+            self?.fetchLyric()
+        }
     }
 }

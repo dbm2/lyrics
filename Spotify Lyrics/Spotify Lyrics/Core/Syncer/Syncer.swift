@@ -11,16 +11,17 @@ import Combine
 
 class Syncer<T> where T: Decodable {
     
-    var updateHandler: ((T?) -> Void)?
-    
     private let timeout: TimeInterval
     private let publisher: AnyPublisher<T, Error>
+    private let result: (Result<T, Error>) -> Void
+    
     private var subscriber: Cancellable?
     private var timer: Timer?
     
-    init(with timeout: TimeInterval, and publisher: AnyPublisher<T, Error>) {
+    init(with timeout: TimeInterval, and publisher: AnyPublisher<T, Error>, handler result: @escaping (Result<T, Error>) -> Void) {
         self.timeout = timeout
         self.publisher = publisher
+        self.result = result
     }
     
     func listen() {
@@ -44,14 +45,13 @@ class Syncer<T> where T: Decodable {
     @objc private func fire() {
         subscriber = publisher.sink(receiveCompletion: { [weak self] (completion) in
             switch completion {
-            case .failure:
-                let object: T? = nil
-                self?.updateHandler?(object)
+            case .failure(let error):
+                self?.result(.failure(error))
             default:
                 break
             }
         }, receiveValue: { [weak self] object in
-            self?.updateHandler?(object)
+            self?.result(.success(object))
         })
     }
 }

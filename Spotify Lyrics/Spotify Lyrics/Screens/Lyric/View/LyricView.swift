@@ -88,6 +88,7 @@ extension LyricView: LyricViewModelDelegate {
     
     func didUpdateTrackInformations(changedAlbum: Bool) {
         lblLyric.animate(to: 0.0, with: 0.15)
+        
         guard viewModel.isPlaying else {
             stackTrackInformations.animate(to: 0.0, with: 0.25)
             return
