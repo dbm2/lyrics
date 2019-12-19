@@ -11,8 +11,11 @@ import Foundation
 protocol LyricViewModelDelegate: class {
     
     func didUpdateUserInformations()
+    
+    func didEndRefreshing()
+    
     func didUpdateTrackInformations(changedAlbum: Bool)
     func didUpdateLyricInformations()
-    
+
     func presentApp()
 }

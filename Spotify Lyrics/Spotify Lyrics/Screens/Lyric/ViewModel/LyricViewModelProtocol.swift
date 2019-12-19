@@ -24,5 +24,6 @@ protocol LyricViewModelProtocol {
     var lyric: String { get }
     
     func prepareContent()
+    func refresh()
     func logout()
 }

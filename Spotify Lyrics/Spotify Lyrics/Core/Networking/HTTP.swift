@@ -31,7 +31,9 @@ final class HTTP {
                            content type: HTTPContentType,
                            authorization: HTTPAuthorization? = nil) -> AnyPublisher<T, Error> where T: Decodable {
         return request(for: url, using: method, content: type, authorization: authorization)
+        .print()
             .map { $0.data }
+        .print()
             .decode(type: T.self, decoder: JSONDecoder())
             .receive(on: DispatchQueue.main)
             .eraseToAnyPublisher()

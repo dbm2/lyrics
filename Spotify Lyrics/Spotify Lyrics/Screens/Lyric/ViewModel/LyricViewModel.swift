@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Combine
 
 final class LyricViewModel: LyricViewModelProtocol {
     
@@ -52,16 +53,22 @@ final class LyricViewModel: LyricViewModelProtocol {
     private var track: Track?
     private var lyricMusic: LyricMusic?
     
+    private var currentUserSubscriber: Cancellable?
+    private var lyricSubscriber: Cancellable?
     private var syncer: Syncer<Player>?
     
     func prepareContent() {
         guard let token = Spotify.currentToken else { return }
-        _ = Request.getCurrentUser(with: token)
+        currentUserSubscriber = Request.getCurrentUser(with: token)
             .sink(receiveCompletion: { _ in }, receiveValue: { [weak self] (user) in
                 self?.user = user
                 self?.delegate?.didUpdateUserInformations()
                 self?.syncPlayer()
             })
+    }
+    
+    func refresh() {
+        syncer?.listen()
     }
     
     func logout() {
@@ -80,7 +87,8 @@ final class LyricViewModel: LyricViewModelProtocol {
     
     private func fetchLyric() {
         guard let track = track else { return }
-        _ = Request.searchLyric(forTrack: track.name, andArtist: track.artists.first?.name ?? "")
+        lyricSubscriber?.cancel()
+        lyricSubscriber = Request.searchLyric(forTrack: track.name, andArtist: track.artists.first?.name ?? "")
             .replaceError(with: LyricSearch(mus: []))
             .sink(receiveValue: { [weak self] (search) in
                 self?.lyricMusic = search.mus?.first
@@ -89,14 +97,21 @@ final class LyricViewModel: LyricViewModelProtocol {
     }
     
     private lazy var didReceivePlayerResult: (Result<Player, Error>) -> Void = { [weak self] result in
-        switch result {
-        case .failure:
-            break
-        case .success(let player):
-            guard self?.track?.id != player.item?.id else { return }
-            let changedAlbum = self?.track?.album.id != player.item?.album.id
-            self?.track = player.item
+        self?.delegate?.didEndRefreshing()
+        
+        let player = try? result.get()
+        
+        let isPlayling = player?.item != nil
+        let changedAlbum = self?.track?.album.id != player?.item?.album.id
+        let changedTrack = player?.item?.id != self?.track?.id
+        
+        self?.track = player?.item
+        
+        if changedTrack {
             self?.delegate?.didUpdateTrackInformations(changedAlbum: changedAlbum)
+        }
+        
+        if isPlayling {
             self?.fetchLyric()
         }
     }

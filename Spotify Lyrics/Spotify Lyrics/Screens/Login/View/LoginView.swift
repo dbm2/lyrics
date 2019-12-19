@@ -38,6 +38,6 @@ final class LoginView: UIViewController {
     }
     
     @objc private func didLoginWithSuccess() {
-        LyricView.present(in: self)
+        dismiss(animated: true)
     }
 }

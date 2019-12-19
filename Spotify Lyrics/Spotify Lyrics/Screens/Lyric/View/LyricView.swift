@@ -11,6 +11,7 @@ import UIKit
 final class LyricView: UIViewController {
     
     @IBOutlet private weak var activityIndicator: UIActivityIndicatorView!
+    @IBOutlet private weak var scrollView: UIScrollView!
     @IBOutlet private weak var stackTrackInformations: UIStackView!
     @IBOutlet private weak var constraintUserProfileViewBottom: NSLayoutConstraint!
     @IBOutlet private weak var imgUserProfilePicture: UILoadableImageView!
@@ -21,8 +22,10 @@ final class LyricView: UIViewController {
     @IBOutlet private weak var lblTrackAlbumName: UILabel!
     @IBOutlet private weak var viewUserInformations: UIView!
     @IBOutlet private weak var lblLyric: UILabel!
+    @IBOutlet private weak var lblNoMusic: UILabel!
     
     private let backgroundLayer = CAGradientLayer()
+    private let refreshControl = UIRefreshControl()
     
     private var viewModel: LyricViewModelProtocol = LyricViewModel()
     
@@ -54,10 +57,15 @@ final class LyricView: UIViewController {
         imgUserProfilePicture.layer.cornerRadius = 30.0
         stackTrackInformations.alpha = 0.0
         lblLyric.alpha = 0.0
+        lblNoMusic.isHidden = true
         
-        let defaultColor = UIColor(white: 0.70, alpha: 1.0)
+        let defaultColor = UIColor(red: 50/255.0, green: 50/255.0, blue: 50/255.0, alpha: 1.0)
         backgroundLayer.colors = [defaultColor.cgColor, defaultColor.cgColor]
         view.layer.insertSublayer(backgroundLayer, at: 0)
+        
+        refreshControl.addTarget(self, action: #selector(refresh), for: .valueChanged)
+        refreshControl.tintColor = .white
+        scrollView.refreshControl = refreshControl
     }
     
     @IBAction private func logout(_ sender: UIButton) {
@@ -68,6 +76,16 @@ final class LyricView: UIViewController {
         guard let image = imgTrackAlbumPicture.image else { return }
         let albumGradientScale = image.averageColor().gradientScale().map { $0.cgColor }
         backgroundLayer.animate(to: albumGradientScale, with: 0.25)
+    }
+    
+    private func updateBackgroundDefault() {
+        let defaultColor = UIColor(red: 50/255.0, green: 50/255.0, blue: 50/255.0, alpha: 1.0)
+        backgroundLayer.animate(to: [defaultColor.cgColor, defaultColor.cgColor], with: 0.25)
+    }
+    
+    @objc private func refresh() {
+        guard !refreshControl.isRefreshing, activityIndicator.isHidden else { return }
+        viewModel.refresh()
     }
 }
 
@@ -87,29 +105,40 @@ extension LyricView: LyricViewModelDelegate {
     }
     
     func didUpdateTrackInformations(changedAlbum: Bool) {
-        lblLyric.animate(to: 0.0, with: 0.15)
-        
         guard viewModel.isPlaying else {
-            stackTrackInformations.animate(to: 0.0, with: 0.25)
+            lblNoMusic.isHidden = false
+            lblLyric.isHidden = true
+            stackTrackInformations.isHidden = true
+            updateBackgroundDefault()
             return
         }
+        
+        lblNoMusic.isHidden = true
+        lblLyric.isHidden = false
+        stackTrackInformations.isHidden = false
+        lblLyric.animate(to: 0.0, with: 0.15)
         
         stackTrackInformations.animate(to: 1.0, with: 0.25)
         
         UILabel.animate(with: 0.25, viewsTexts: (lblTrackName, viewModel.trackName),
                                                 (lblTrackArtistName, viewModel.trackArtistName),
                                                 (lblTrackAlbumName, viewModel.trackAlbumName))
-        
-        imgTrackAlbumPicture.load(from: viewModel.trackAlbumPictureURL,
-                                  placeholder: UIImage(named: "icon_album")) { [weak self] in
-            guard changedAlbum else { return }
-            self?.updateBackground()
+    
+        if changedAlbum {
+            imgTrackAlbumPicture.load(from: viewModel.trackAlbumPictureURL,
+                                      placeholder: UIImage(named: "icon_album")) { [weak self] in
+                self?.updateBackground()
+            }
         }
     }
     
     func didUpdateLyricInformations() {
         lblLyric.animate(to: 1.0, with: 0.15)
         lblLyric.animate(to: viewModel.lyric, with: 0.25)
+    }
+    
+    func didEndRefreshing() {
+        refreshControl.endRefreshing()
     }
     
     func presentApp() {
