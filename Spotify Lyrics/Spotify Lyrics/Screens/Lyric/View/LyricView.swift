@@ -24,6 +24,7 @@ final class LyricView: UIViewController {
     @IBOutlet private weak var lblLyric: UILabel!
     @IBOutlet private weak var lblNoMusic: UILabel!
     
+    private var currentLyricScale: CGFloat?
     private let backgroundLayer = CAGradientLayer()
     private let refreshControl = UIRefreshControl()
     
@@ -70,6 +71,16 @@ final class LyricView: UIViewController {
     
     @IBAction private func logout(_ sender: UIButton) {
         viewModel.logout()
+    }
+    
+    @IBAction private func handlePinch(_ sender: UIPinchGestureRecognizer) {
+        if sender.state == .began, let currentScale = currentLyricScale {
+            sender.scale = currentScale
+        } else if sender.state == .ended {
+            currentLyricScale = sender.scale
+        }
+        let fontSize: CGFloat = min(max(17.0, sender.scale * 17), 35.0)
+        lblLyric.font = UIFont(name: "Helvetica Neue", size: fontSize)
     }
     
     private func updateBackground() {

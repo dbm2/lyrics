@@ -179,6 +179,7 @@
                 </view>
             </subviews>
             <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <gestureRecognizers/>
             <constraints>
                 <constraint firstItem="chH-sZ-uNN" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="00X-fB-W3D"/>
                 <constraint firstItem="j45-ic-dyT" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="48G-24-dpP"/>
@@ -192,8 +193,16 @@
                 <constraint firstItem="j45-ic-dyT" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="wgx-xr-vkP"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <connections>
+                <outletCollection property="gestureRecognizers" destination="v64-lM-TVW" appends="YES" id="ddI-AH-k9u"/>
+            </connections>
             <point key="canvasLocation" x="139" y="125"/>
         </view>
+        <pinchGestureRecognizer id="v64-lM-TVW">
+            <connections>
+                <action selector="handlePinch:" destination="-1" id="NGF-zV-DSh"/>
+            </connections>
+        </pinchGestureRecognizer>
     </objects>
     <resources>
         <image name="icon_logout" width="256" height="256"/>
